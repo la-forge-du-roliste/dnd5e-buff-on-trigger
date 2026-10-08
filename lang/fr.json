@@ -214,6 +214,8 @@
   "BOT.ui.condition.label": "Condition",
   "BOT.ui.condition.hit": "Touché (hit)",
   "BOT.ui.condition.miss": "Raté (miss)",
+  "BOT.ui.condition.critical": "Coup critique",
+  "BOT.ui.condition.criticalFailure": "Échec critique",
   "BOT.ui.condition.always": "Toujours (always)",
   "BOT.ui.receivedConditions.title": "Conditions de dégâts reçus",
   "BOT.ui.additionalConditions.title": "Conditions supplémentaires",
