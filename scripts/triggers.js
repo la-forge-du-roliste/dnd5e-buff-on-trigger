@@ -1555,6 +1555,15 @@ function isWorkflowCriticalHit(workflow) {
   );
 }
 
+function isWorkflowCriticalFailure(workflow) {
+  return Boolean(
+    workflow?.isFumble
+    || workflow?.fumble
+    || workflow?.attackRoll?.isFumble
+    || workflow?.attackRoll?.options?.fumble
+  );
+}
+
 function getMissedAttackTargets(workflow) {
   if (workflow?.missedTargets?.size) return [...workflow.missedTargets];
   const hitIds = new Set([...(workflow?.hitTargets ?? [])].map((token) => token.id));
@@ -1575,6 +1584,7 @@ function getStoredTargetCandidates(workflow, flag) {
     if (condition === "hit") return [...(workflow.hitTargets ?? [])];
     if (condition === "miss") return getMissedAttackTargets(workflow);
     if (condition === "critical") return isWorkflowCriticalHit(workflow) ? [...(workflow.hitTargets ?? [])] : [];
+    if (condition === "criticalFailure") return isWorkflowCriticalFailure(workflow) ? getMissedAttackTargets(workflow) : [];
 
     const candidates = new Map();
     for (const token of [...(workflow.targets ?? []), ...(workflow.hitTargets ?? []), ...getMissedAttackTargets(workflow)]) {
@@ -1629,6 +1639,11 @@ function doesAttackConditionMatch(workflow, flag) {
   if (condition === "critical") {
     if (isWorkflowCriticalHit(workflow) && hitTargets.length > 0) return true;
     debugLog(`[${MODULE_ID}] Déclenchement ignoré : condition d’attaque non remplie`);
+    return false;
+  }
+  if (condition === "criticalFailure") {
+    if (isWorkflowCriticalFailure(workflow) && getMissedAttackTargets(workflow).length > 0) return true;
+    debugLog(`[${MODULE_ID}] Déclenchement ignoré : échec critique non constaté`);
     return false;
   }
 
