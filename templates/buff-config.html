@@ -165,6 +165,8 @@
       <select name="condition">
         <option value="hit"    {{#if flag.conditionHit}}selected{{/if}}>{{localize "BOT.ui.condition.hit"}}</option>
         <option value="miss"   {{#if flag.conditionMiss}}selected{{/if}}>{{localize "BOT.ui.condition.miss"}}</option>
+        <option value="critical" {{#if flag.conditionCritical}}selected{{/if}}>{{localize "BOT.ui.condition.critical"}}</option>
+        <option value="criticalFailure" {{#if flag.conditionCriticalFailure}}selected{{/if}}>{{localize "BOT.ui.condition.criticalFailure"}}</option>
         <option value="always" {{#if flag.conditionAlways}}selected{{/if}}>{{localize "BOT.ui.condition.always"}}</option>
       </select>
     </div>

@@ -1459,6 +1459,8 @@ class BuffTriggerConfig extends foundry.applications.api.HandlebarsApplicationMi
       showAttackCondition:   ATTACK_TRIGGER_TYPES.includes(raw.type),
       conditionHit:          (raw.condition ?? "hit") === "hit",
       conditionMiss:         raw.condition === "miss",
+      conditionCritical:     raw.condition === "critical",
+      conditionCriticalFailure: raw.condition === "criticalFailure",
       conditionAlways:       raw.condition === "always",
       damageTargetModeTriggerTarget: normalizeDamageTargetMode(raw.damage?.targetMode) === "triggerTarget",
       damageTargetModeSelf: normalizeDamageTargetMode(raw.damage?.targetMode) === "self",
